@@ -27,6 +27,47 @@ public class ArithmeticController {
 		return "Sreedhar";
 	}
 	
+	@ApiOperation(value = "Arithmetic progression API", notes = "API for Arithmetic Progression")
+	@PostMapping("/sum2")
+public String arithmeticController2(HttpServletRequest request
+			
+			
+			) {
+		
+		String token = request.getHeader("Authorization");
+		System.out.println("Token is " + token);
+		
+		return "Pooja";
+	}
+	
+	
+	@ApiOperation(value = "Arithmetic progression API", notes = "API for Arithmetic Progression")
+	@PostMapping("/sum3")
+public String arithmeticController3(HttpServletRequest request
+			
+			
+			) {
+		
+		String token = request.getHeader("Authorization");
+		System.out.println("Token is " + token);
+		
+		return "Vibhu";
+	}
+	
+	
+	@ApiOperation(value = "Arithmetic progression API", notes = "API for Arithmetic Progression")
+	@PostMapping("/random")
+public String arithmeticController4(HttpServletRequest request
+			
+			
+			) {
+		
+		String token = request.getHeader("Authorization");
+		System.out.println("Token is " + token);
+		
+		return "Robin";
+	}
+	
 	
 
 }

@@ -1,5 +1,6 @@
 package com.datastructures.maths.arithmeticprogression;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -10,6 +11,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.google.common.base.Predicates;
+
+import io.swagger.models.HttpMethod;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -70,21 +74,57 @@ public class SwaggerConfig implements WebMvcConfigurer {
 		    return new ApiKey("Authorization", "Authorization", "header");
 		  }
 	 
+	 //Method to make all the controllers with authetication
+			
+			private SecurityContext securityContext() {
+				return SecurityContext.builder().securityReferences(defaultAuth()).forPaths(PathSelectors.regex("/sum.*"))
+						.build();
+			}
+			
+			  private List<SecurityReference> defaultAuth() { AuthorizationScope
+			  authorizationScope = new AuthorizationScope("global", "accessEverything");
+			  AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+			  authorizationScopes[0] = authorizationScope; return Arrays.asList(new
+			  SecurityReference("Authorization", authorizationScopes)); }
+			 
 	 
-	 private SecurityContext securityContext() {
-		    return SecurityContext.builder()
-		        .securityReferences(defaultAuth())
-		        .forPaths(PathSelectors.any())
-		        .build();
-		  }
-	 
-	 
-	 private List<SecurityReference> defaultAuth() {
-		    AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
-		    AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
-		    authorizationScopes[0] = authorizationScope;
-		    return Arrays.asList(new SecurityReference("Authorization", authorizationScopes));
-		  }
+	 //Add below to the docket method also for all authentication of the controllers.
+			  ///check examplees of security context for specific method level authetication in the below link,
+			  //https://www.codota.com/code/java/methods/springfox.documentation.spring.web.plugins.Docket/securityContexts
+			/*
+			 * private SecurityContext securityContext() { return
+			 * SecurityContext.builder().securityReferences(defaultAuth()).forPaths(
+			 * PathSelectors.regex("/v1/api/.*")).build(); }
+			 */
+	 //.securityContexts(Collections.singletonList(securityContext()));
+			/*
+			 * private List<SecurityReference> securityReference =
+			 * singletonList(SecurityReference.builder() .reference("JWT") .scopes(new
+			 * AuthorizationScope[0]) .build() );
+			 * 
+			 * private List<HttpMethod> methods = Arrays.asList( HttpMethod.POST,
+			 * HttpMethod.PUT, HttpMethod.DELETE );
+			 * 
+			 * private List<SecurityContext> securityContext() { List<SecurityContext> lsc =
+			 * new ArrayList<>();
+			 * 
+			 * lsc.add(SecurityContext.builder() .securityReferences(securityReference)
+			 * .forPaths(PathSelectors.ant("" + "/category/**"))
+			 * .forHttpMethods(Predicates.in(methods)) .build() );
+			 * 
+			 * lsc.add(SecurityContext.builder() .securityReferences(securityReference)
+			 * .forPaths(PathSelectors.ant("" + "/tag/**"))
+			 * .forHttpMethods(Predicates.in(methods)) .build() );
+			 * 
+			 * lsc.add(SecurityContext.builder() .securityReferences(securityReference)
+			 * .forPaths(PathSelectors.ant("" + "/file/**"))
+			 * .forHttpMethods(Predicates.in(methods)) .build() );
+			 * 
+			 * lsc.add(SecurityContext.builder() .securityReferences(securityReference)
+			 * .forPaths(PathSelectors.ant("" + "/user/**")) .build() );
+			 * 
+			 * return lsc; }
+			 */
 	 
 	 
 }
