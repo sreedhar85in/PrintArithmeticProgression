@@ -91,6 +91,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
 	 //Add below to the docket method also for all authentication of the controllers.
 			  ///check examplees of security context for specific method level authetication in the below link,
 			  //https://www.codota.com/code/java/methods/springfox.documentation.spring.web.plugins.Docket/securityContexts
+			  //test commit for checking emails
 			/*
 			 * private SecurityContext securityContext() { return
 			 * SecurityContext.builder().securityReferences(defaultAuth()).forPaths(
