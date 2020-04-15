@@ -2,10 +2,17 @@ package com.datastructures.maths.arithmeticprogression.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.datastructures.maths.arithmeticprogression.model.ArithmeticResponse;
+import com.datastructures.maths.arithmeticprogression.model.ArithmeticprogRequest;
+import com.datastructures.maths.arithmeticprogression.service.ArithmeticService;
 
 import io.swagger.annotations.ApiOperation;
 
@@ -13,10 +20,15 @@ import io.swagger.annotations.ApiOperation;
 //@RequestMapping("/arithmeticprogression")
 public class ArithmeticController {
 	
+	@Autowired
+	ArithmeticService arithmeticService;
+	
+	
 	@ApiOperation(value = "Arithmetic progression API", notes = "API for Arithmetic Progression")
 	@PostMapping("/sum")
 	
-	public String arithmeticController(HttpServletRequest request
+	public ResponseEntity arithmeticController(HttpServletRequest request,
+			@RequestBody ArithmeticprogRequest requestap
 			
 			
 			) {
@@ -24,7 +36,9 @@ public class ArithmeticController {
 		String token = request.getHeader("Authorization");
 		System.out.println("Token is " + token);
 		
-		return "Sreedhar";
+		ArithmeticResponse response = arithmeticService.sumofAP(requestap); 
+		
+		return new ResponseEntity(response, HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "Arithmetic progression API", notes = "API for Arithmetic Progression")
