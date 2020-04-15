@@ -2,6 +2,7 @@ package com.datastructures.maths.arithmeticprogression.service;
 
 import org.springframework.stereotype.Service;
 
+import com.datastructures.maths.arithmeticprogression.model.AirthmeticSeriesResponse;
 import com.datastructures.maths.arithmeticprogression.model.ArithmeticResponse;
 import com.datastructures.maths.arithmeticprogression.model.ArithmeticprogRequest;
 
@@ -28,7 +29,7 @@ public class ArithmeticService {
 		//test.append(firstdigit + " ");
 		for(int i=1; i<=seriesnthdigit; i++) {
 			
-			test.append(firstdigit + " ");
+			test.append(firstdigit + " " + ",");
 			firstdigit = firstdigit + diff;
 			
 		}
@@ -38,6 +39,33 @@ public class ArithmeticService {
 	//	System.out.println("The value of the series is " + " " + sum);
 		
 		
+		
+		return response;
+	}
+	
+	public AirthmeticSeriesResponse seriesPrint(ArithmeticprogRequest requestap) {
+		
+		int firstdigit = requestap.getFirstNumber();
+		int diff = requestap.getDifference();
+		int seriesnthdigit = requestap.getNumberofSeries();
+		StringBuilder test = new StringBuilder();
+		//test.append(firstdigit + " ");
+		for(int i=1; i<=seriesnthdigit; i++) {
+			if(i==seriesnthdigit) {
+				test.append(firstdigit);
+				
+			}
+			else {
+				test.append(firstdigit + "," + " ");
+			firstdigit = firstdigit + diff;
+			}
+			
+		}
+		
+		AirthmeticSeriesResponse response = new AirthmeticSeriesResponse();
+		response.setOutcomeCode(200);
+		response.setOutcomeMessage("Succesfully calculated the sum of the Arithmetic progression series");
+		response.setSeries(test);
 		
 		return response;
 	}
