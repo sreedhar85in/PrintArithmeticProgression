@@ -11,11 +11,13 @@ public class ArithmeticService {
 	
 	public ArithmeticResponse sumofAP(ArithmeticprogRequest requestap) {
 		
-		int firstdigit = requestap.getFirstNumber();
-		int diff = requestap.getDifference();
-		int seriesnthdigit = requestap.getNumberofSeries();
+		float firstdigit = requestap.getFirstNumber();
+		float diff = requestap.getDifference();
+		float seriesnthdigit = requestap.getNumberofSeries();
 		
-		int sumofSeries = seriesnthdigit/2*((2*firstdigit)+((seriesnthdigit-1)*diff));
+		float sumofSeries = (seriesnthdigit/2)*((2*firstdigit)+(((seriesnthdigit-1)*diff)));
+		//float sumofSeries = (seriesnthdigit/2)*(2*firstdigit+(seriesnthdigit-1)*diff);
+		//float sum = (seriesnthdigit / 2) * (2 * firstdigit + (seriesnthdigit - 1) * diff);
 		
 		ArithmeticResponse response = new ArithmeticResponse();
 		response.setOutcomeCode(200);
@@ -32,6 +34,8 @@ public class ArithmeticService {
 		}
 		
 		System.out.println("The value of the series is " + " " + test);
+	//	System.out.println("The value of the series is " + " " + sumofSeries);
+	//	System.out.println("The value of the series is " + " " + sum);
 		
 		
 		

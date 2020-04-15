@@ -7,6 +7,6 @@ public class ArithmeticResponse {
 	
 	private int outcomeCode;
 	private String outcomeMessage;
-	private int sumofArithmeticProg;
+	private float sumofArithmeticProg;
 
 }
