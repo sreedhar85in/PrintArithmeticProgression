@@ -37,6 +37,16 @@ public class InternalExceptionHandler extends ResponseEntityExceptionHandler {
 		super();
 	}
 	
+	@ExceptionHandler({ InternalException.class })
+	protected ResponseEntity<ApiError> handleOutcomeCode(Exception e, WebRequest request) {
+		ApiError obj = new ApiError();
+		InternalException re = (InternalException) e;
+		obj.setOutComeCode(re.getOutcomeCode());
+		obj.setOutComeMessage(re.getOutcomeMessage());
+		obj.setDeveloperMessage(re.getInternalMessage());
+		log.error("Internal Exception - OutcomeCode: " + re.getOutcomeCode() + " Message: " + re.getOutcomeMessage());
+		return new ResponseEntity(obj, HttpStatus.BAD_REQUEST);
+	}
 	
 	@Override
 	protected final ResponseEntity<Object> handleHttpMessageNotReadable(final HttpMessageNotReadableException ex, final HttpHeaders headers, final HttpStatus status, final WebRequest request){
