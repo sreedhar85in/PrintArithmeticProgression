@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.datastructures.maths.arithmeticprogression.exception.InternalException;
 import com.datastructures.maths.arithmeticprogression.model.AirthmeticSeriesResponse;
 import com.datastructures.maths.arithmeticprogression.model.ArithmeticResponse;
 import com.datastructures.maths.arithmeticprogression.model.ArithmeticprogRequest;
@@ -29,7 +30,7 @@ public class ArithmeticController {
 
 	public ResponseEntity arithmeticController(HttpServletRequest request, @RequestBody ArithmeticprogRequest requestap
 
-	) {
+	) throws InternalException {
 
 		String token = request.getHeader("Authorization");
 		System.out.println("Token is " + token);
@@ -43,7 +44,7 @@ public class ArithmeticController {
 	@PostMapping("/printseries")
 	public ResponseEntity arithmeticController2(HttpServletRequest request, @RequestBody ArithmeticprogRequest requestap
 
-	) {
+	) throws InternalException {
 
 		String token = request.getHeader("Authorization");
 		System.out.println("Token is " + token);

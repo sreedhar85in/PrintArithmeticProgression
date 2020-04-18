@@ -2,6 +2,7 @@ package com.datastructures.maths.arithmeticprogression.service;
 
 import org.springframework.stereotype.Service;
 
+import com.datastructures.maths.arithmeticprogression.exception.InternalException;
 import com.datastructures.maths.arithmeticprogression.model.AirthmeticSeriesResponse;
 import com.datastructures.maths.arithmeticprogression.model.ArithmeticResponse;
 import com.datastructures.maths.arithmeticprogression.model.ArithmeticprogRequest;
@@ -10,11 +11,16 @@ import com.datastructures.maths.arithmeticprogression.model.ArithmeticprogReques
 public class ArithmeticService {
 	
 	
-	public ArithmeticResponse sumofAP(ArithmeticprogRequest requestap) {
+	public ArithmeticResponse sumofAP(ArithmeticprogRequest requestap) throws InternalException {
 		
 		float firstdigit = requestap.getFirstNumber();
 		float diff = requestap.getDifference();
 		float seriesnthdigit = requestap.getNumberofSeries();
+		
+		if(seriesnthdigit > 100) {
+			
+			throw new InternalException(200, "Internal Exception", " series is not allowed to print more than 100");
+		}
 		
 		float sumofSeries = (seriesnthdigit/2)*((2*firstdigit)+(((seriesnthdigit-1)*diff)));
 		//float sumofSeries = (seriesnthdigit/2)*(2*firstdigit+(seriesnthdigit-1)*diff);
@@ -43,11 +49,18 @@ public class ArithmeticService {
 		return response;
 	}
 	
-	public AirthmeticSeriesResponse seriesPrint(ArithmeticprogRequest requestap) {
+	public AirthmeticSeriesResponse seriesPrint(ArithmeticprogRequest requestap) throws InternalException {
 		
 		int firstdigit = requestap.getFirstNumber();
 		int diff = requestap.getDifference();
 		int seriesnthdigit = requestap.getNumberofSeries();
+		
+	if(seriesnthdigit > 100) {
+			
+			throw new InternalException(200, "Internal Exception", " series is not allowed to print more than 100");
+		}
+	
+	
 		StringBuilder test = new StringBuilder();
 		//test.append(firstdigit + " ");
 		for(int i=1; i<=seriesnthdigit; i++) {
