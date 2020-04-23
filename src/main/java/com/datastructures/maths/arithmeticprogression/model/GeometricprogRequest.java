@@ -6,7 +6,7 @@ import lombok.Data;
 public class GeometricprogRequest {
 	
 	private int firstNumber;
-	private int difference;
+	private int ratio;
 	private int numberofSeries;
 
 }
